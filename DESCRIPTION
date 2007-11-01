@@ -1,8 +1,8 @@
 Package: SASxport
 Type: Package
 Title: Read and Write SAS XPORT Files
-Version: 1.1.1
-Date: 2007-09-25
+Version: 1.2.0
+Date: 2007-11-01
 Description: This package provides functions for reading, listing
   the contents of, and writing SAS xport format files. 
   The functions support reading and writing of either
@@ -32,9 +32,8 @@ Author:
   The creation of this package was partially funded by Metrum Institute
   <http://metruminstitute.org>.  
 Maintainer: Gregory R. Warnes <greg@random-technologies-llc.com>
-License: GPL 2.0 or later
+License: GPL-2
 Depends: R (>= 2.4.0)
-Imports: foreign (>= 0.8-20), chron
-Enhances: foreign
+Imports: chron
 URL: http://random-technologies-llc.com, http://metruminstitute.org
-Packaged: Wed Oct  3 01:40:27 2007; warnes
+Packaged: Thu Nov  1 12:43:25 2007; warnes

@@ -43,6 +43,9 @@
 
 void ieee2ibm(register unsigned char *out, register const unsigned char *in, int count)
 {
+  static char numeric_NA[8] = {0x2e,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+
+
 	/*
 	 *  IBM Format.
 	 *  7-bit exponent, base 16.
@@ -50,8 +53,8 @@ void ieee2ibm(register unsigned char *out, register const unsigned char *in, int
 	 */
 	register int	i;
 	for( i=count-1; i >= 0; i-- )  {
-		register unsigned long left, right;
-		register int fix, exp, signbit;
+	  register unsigned long left, right;
+	  register int fix, exp, signbit;
 
 		left  = (in[0]<<24) | (in[1]<<16) | (in[2]<<8) | in[3];
 		right = (in[4]<<24) | (in[5]<<16) | (in[6]<<8) | in[7];
@@ -59,8 +62,9 @@ void ieee2ibm(register unsigned char *out, register const unsigned char *in, int
 
 		exp = ((left >> 20) & 0x7FF);
 		signbit = (left & 0x80000000) >> 24;
+
 		if( exp == 0 || exp == 0x7FF )  {
-ibm_undef:		*out++ = 0;		/* IBM zero.  No NAN */
+		        *out++ = 0;		/* IBM zero.  No NAN */
 			*out++ = 0;
 			*out++ = 0;
 			*out++ = 0;
@@ -78,9 +82,10 @@ ibm_undef:		*out++ = 0;		/* IBM zero.  No NAN */
 		exp /= 4;		/* excess 32, base 16 */
 		exp += (64-32+1);	/* excess 64, base 16, plus fudge */
 		if( (exp & ~0xFF) != 0 )  {
-		  //WARNING("ntohd:  IBM exponent overflow");
-			fprintf(stderr,"ntohd:  IBM exponent overflow\n");
-			goto ibm_undef;
+			warning("IBM exponent overflow, generating NA\n");
+			memcpy(out, numeric_NA, 8);
+			out+= 8;
+			continue;
 		}
 
 		if( fix )  {
@@ -88,7 +93,8 @@ ibm_undef:		*out++ = 0;		/* IBM zero.  No NAN */
 			right <<= fix;
 		}
 
-		if( signbit )  {
+		/* if( 0 && signbit )  { */
+		if( 0 )  {
 			/* The IBM actually uses complimented mantissa
 			 * and exponent.
 			 */
@@ -108,7 +114,6 @@ ibm_undef:		*out++ = 0;		/* IBM zero.  No NAN */
 			left &= 0x00FFFFFF;
 			exp = (~exp) & 0x7F;
 		}
-
 
 		/*  Not actually required, but for comparison purposes,
 		 *  normalize the number.  Remove for production speed.
