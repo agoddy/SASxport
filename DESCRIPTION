@@ -1,7 +1,7 @@
 Package: SASxport
 Type: Package
 Title: Read and Write SAS XPORT Files
-Version: 1.2.0
+Version: 1.2.1
 Date: 2007-11-01
 Description: This package provides functions for reading, listing
   the contents of, and writing SAS xport format files. 
@@ -36,4 +36,4 @@ License: GPL-2
 Depends: R (>= 2.4.0)
 Imports: chron
 URL: http://random-technologies-llc.com, http://metruminstitute.org
-Packaged: Thu Nov  1 12:43:25 2007; warnes
+Packaged: Mon Nov  5 10:39:53 2007; warnes
