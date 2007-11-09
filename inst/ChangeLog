@@ -1,3 +1,29 @@
+2007-11-09 19:59  warnes
+
+	* [r1226] src/ibm2ieee.c, src/ieee2ibm.c: Apply patches to fix
+	  problems on 64 bit platforms, as sumitted by Brian Ripley.
+
+2007-11-07 19:01  warnes
+
+	* [r1225] tests/Alfalfa_Test.Rout.save,
+	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testNegative.Rout.save, tests/testNumeric.Rout.save,
+	  tests/test_fields.Rout.save, tests/xport.Rout.save,
+	  tests/xxx.Rout.save: Update version number
+
+2007-11-07 18:59  warnes
+
+	* [r1224] DESCRIPTION: Bump version number
+
+2007-11-07 18:14  warnes
+
+	* [r1223] src/ibm2ieee.c, src/reverse.c, src/writeSAS.c,
+	  src/writeSAS.h: Apply patches to fix problems on 64 bit
+	  platforms, as sumitted by Brian Ripley, and to replace assert()
+	  calls with calls a macro that maps to error() unless standalone
+	  testing is being done, in which case assert() is used.
+
 2007-11-05 15:25  warnes
 
 	* [r1220] DESCRIPTION, inst/NEWS, src/writeSAS.c: Remove extraneous
