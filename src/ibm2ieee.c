@@ -146,7 +146,7 @@ ibm_normalized:
 
 		/* After suitable testing, this check can be deleted */
 		if( (left & 0x00800000) == 0 )  {
-			fprintf(stderr,"ibm->ieee missing 1, left=x%x\n", left);
+			REprintf("ibm->ieee missing 1, left=x%x\n", left);
 			left = (left<<1) | (right>>31);
 			right <<= 1;
 			goto ibm_normalized;
