@@ -1,5 +1,56 @@
+2013-05-31  warnes
+
+	* [r1666] DESCRIPTION, inst/NEWS: Update for SASxport 1.3.4
+	* [r1665] tests/Alfalfa_Test.R, tests/Alfalfa_Test.Rout.save,
+	  tests/Theoph.R, tests/Theoph.Rout.save, tests/cars.R,
+	  tests/cars.Rout.save, tests/dfAttributes.R,
+	  tests/testBlockBoundary.R, tests/testDates.R,
+	  tests/testDates.Rout.save, tests/testDuplicateNames.R,
+	  tests/testDuplicateNames.Rout.save, tests/testFactorAllNA.R,
+	  tests/testManyNames.R, tests/testManyNames.Rout.save,
+	  tests/testNegative.R, tests/testNegative.Rout.save,
+	  tests/testNumeric.R, tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.R,
+	  tests/testUnnamedComponents.Rout.save, tests/test_as_is.R,
+	  tests/test_as_is.Rout.save, tests/test_fields.R,
+	  tests/test_fields.Rout.save, tests/xport.R,
+	  tests/xport.Rout.save, tests/xxx.R, tests/xxx.Rout.save:
+	  Explicitly specify timezone in tests/*.R to avoid extraneous
+	  warnings
+	* [r1664] tests/Alfalfa_Test.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testDuplicateNames.Rout.save,
+	  tests/testManyNames.Rout.save, tests/testNegative.Rout.save,
+	  tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Update build date.
+	* [r1663] tests/Alfalfa_Test.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testDuplicateNames.Rout.save,
+	  tests/testManyNames.Rout.save, tests/testNegative.Rout.save,
+	  tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Update for SASxport
+	  1.3.3
+	* [r1662] DESCRIPTION, inst/NEWS: Update for SASxport 1.3.3
+	* [r1661] R/make.formats.R, tests/testFactorAllNA.R: Correct error
+	  in write.xport when a factor contains only NA entries.
+
 2013-05-12  warnes
 
+	* [r1660] DESCRIPTION, R/SAStype.R, R/read.xport.R, inst/NEWS,
+	  man/SASxport-package.Rd, man/label.Rd, man/read.xport.Rd,
+	  man/write.xport.Rd, tests/Alfalfa_Test.Rout.save,
+	  tests/Theoph.Rout.save, tests/cars.Rout.save,
+	  tests/testDates.Rout.save, tests/testDuplicateNames.Rout.save,
+	  tests/testManyNames.Rout.save, tests/testNegative.Rout.save,
+	  tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Update NEWS for
+	  release
 	* [r1659] NAMESPACE, R/SAStype.R, R/read.xport.R, src/SASxport.c,
 	  tests/dfAttributes.R: Complete work to handle dataframe label and
 	  type
