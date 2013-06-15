@@ -4,6 +4,7 @@
  *
  *  Copyright 1999-1999 Douglas M. Bates <bates@stat.wisc.edu>,
  *                      Saikat DebRoy <saikat@stat.wisc.edu>
+ *  Additions copyright 2007-2013 Gregory R. Warnes <greg@warnes.net>
  *
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -587,7 +588,9 @@ xport_info(SEXP xportFile)
     PROTECT(ans = allocVector(VECSXP, 0));
     PROTECT(ansNames  = allocVector(STRSXP, 0));
 
-    while(namestrLength > 0 && (memLength = init_mem_info(fp, dsname, dslabel, dstype)) > 0) {
+    while(!feof(fp))
+      {
+	memLength = init_mem_info(fp, dsname, dslabel, dstype);
 
 	PROTECT(varInfo = allocVector(VECSXP, VAR_INFO_LENGTH));
 	setAttrib(varInfo, R_NamesSymbol, varInfoNames);

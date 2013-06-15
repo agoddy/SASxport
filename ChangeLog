@@ -1,5 +1,30 @@
+2013-06-14  warnes
+
+	* [r1670] R/fstr.R, R/read.xport.R, src/SASxport.c, src/writeSAS.c,
+	  tests/Alfalfa_Test.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testDuplicateNames.Rout.save, tests/testEmpty.R,
+	  tests/testEmpty.Rout.save, tests/testManyNames.Rout.save,
+	  tests/testNegative.Rout.save, tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Complete changes to
+	  handle empty datasets in xport files.
+	* [r1669] R/write.xport.R: Properly handle empty datasets
+	* [r1668] R/lookup.xport.R, src/SASxport.c: Fix bug when xpt file
+	  contains an empty data set
+
 2013-05-31  warnes
 
+	* [r1667] tests/Alfalfa_Test.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testDuplicateNames.Rout.save,
+	  tests/testManyNames.Rout.save, tests/testNegative.Rout.save,
+	  tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Update test Rout.save
+	  files to match new version
 	* [r1666] DESCRIPTION, inst/NEWS: Update for SASxport 1.3.4
 	* [r1665] tests/Alfalfa_Test.R, tests/Alfalfa_Test.Rout.save,
 	  tests/Theoph.R, tests/Theoph.Rout.save, tests/cars.R,
