@@ -1,9 +1,4 @@
-\name{label}
-
-\alias{label}
-\alias{label.default}
-\alias{label<-}
-\alias{label<-.default}
+\name{SASformat}
 
 \alias{SASformat}
 \alias{SASformat.default}
@@ -25,7 +20,8 @@ Set or Retreive the 'label', 'SASformat', 'SASiformat', or 'SAStype'
 attribute of a vector or (components of) a data frame
 }
 \description{
-  Sets or retrieves the \code{"label"}, \code{"SASformat"}, 
+  Sets or retrieves the %\code{"label"},%
+  \code{"SASformat"},
   \code{"SASiformat"}, or \code{SAStype} attribute of an object.
 
   More comprehensive support for object labels, and SASformat, are
@@ -34,9 +30,6 @@ attribute of a vector or (components of) a data frame
   Note that \code{SAStype} enforces the SAS 8-character naming convention.
 }
 \usage{
-label(x, default)
-label(x) <- value
-
 SASformat(x, default)
 SASformat(x) <- value
 
@@ -48,7 +41,7 @@ SAStype(x) <- value
 }
 \arguments{
 \item{x}{any object}
-\item{value}{new value for the  \code{"label"}, \code{"SASformat"}, 
+\item{value}{new value for the  \code{"label"}, \code{"SASformat"},
   \code{"SASiformat"}, or \code{SAStype}  attribute of an object.}
 \item{default}{value to return when no appropriate attribute is
   found.  The usual return value is NULL.}
@@ -71,12 +64,12 @@ SAStype(x) <- value
 fail.time <- c(10,20)
 
 # set attributes
-label(fail.time) <- 'Failure Time'
+%% label(fail.time) <- 'Failure Time'
 SASformat(fail.time) <- 'Numeric2'
 SASiformat(fail.time) <- 'Numeric2'
 
 # display individual attributes
-label(fail.time)
+%% label(fail.time)
 SASformat(fail.time)
 SASiformat(fail.time)
 
@@ -85,22 +78,13 @@ attributes(fail.time)
 
 ## SAStype only applies to data frames
 df <- data.frame( fail.time, day=c("Mon","Tue") )
-label(df)   <- "Data frame object"
 SAStype(df) <- "USER"
 
-label(df)
 SAStype(df)
 
 ## Example showing specification of default return value
 a <- 70
 label(a, default="no label")
-
-\dontrun{
-# Hmisc packages functions label attributes for annotating tables and plots:
-library(Hmisc)
-label(fail.time)
-describe(fail.time)
-}
 }
 \keyword{utilities}
 \keyword{interface}

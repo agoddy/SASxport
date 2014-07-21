@@ -5,7 +5,7 @@
  *    Author:  Gregory R. Warnes <greg@warnes.net>
  *
  *    Copyright (C) 2007  Gregory R. Warnes <greg@warnes.net>
- * 
+ *
  *    This program is free software; you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
  *    the Free Software Foundation; either version 2 of the License, or
@@ -30,26 +30,15 @@
 #include <R.h>
 #include <Rinternals.h>
 #include <sys/types.h>
+#include "to_bigend.h"
+#include "ibm2ieee.h"
 
 
 /*****
- * Useful constants 
+ * Useful constants
  *****/
 
 #define MISSING 0x2e000000  /* Standard SAS missing value: '.' */
-
-/*****
-  REVERSE macro, used as a wrapper for the reverse() function to avoid
-  compiling/calling it on little-endian.
- *****/
-
-/* #ifdef BIG_ENDIAN */
-/* #  define REVERSE(a,b)  */
-/* #elif defined(LITTLE_ENDIAN) */
-/* #  define REVERSE(a,b) reverse( (unsigned char*) a, (size_t) b) */
-/* #else  */
-#  define REVERSE(a,b) reverse( (unsigned char*) a, (size_t) b)
-/*#endif*/
 
 /*****
  * Useful macro functions
@@ -62,9 +51,8 @@
 #define ASSERT(x) if(!(x)) error("Assertion failed: x")
 #endif
 
-
 /*****
- *  File Record Structures 
+ *  File Record Structures
  *****/
 
 struct FILE_HEADER {
@@ -73,7 +61,7 @@ struct FILE_HEADER {
 
   /* Line 2 */
   char sas_symbol1[8];
-  char sas_symbol2[8];    
+  char sas_symbol2[8];
   char saslib[8];
   char sasver[8];
   char sas_os[8];
@@ -98,12 +86,12 @@ struct MEMBER_HEADER {
   char sasdata[8];
   char sasver[8];
   char sas_osname[8];
-  char blanks[24];    
+  char blanks[24];
   char sas_create[16];
 
   /* Line 4 */
   char sas_modified[16];
-  //char blanks2[64];   
+  //char blanks2[64];
   char padding[16];
   char dslabel[40];
   char dstype[8];
@@ -124,7 +112,7 @@ struct NAMESTR_RECORD {
   short   nvar0;              /* VARNUM                              */
   char    nname[8];           /* NAME OF VARIABLE                    */
   char    nlabel[40];         /* LABEL OF VARIABLE                   */
-  
+
   char    nform[8];           /* NAME OF FORMAT                      */
   short   nfl;                /* FORMAT FIELD LENGTH OR 0            */
   short   nfd;                /* FORMAT NUMBER OF DECIMALS           */
@@ -137,7 +125,7 @@ struct NAMESTR_RECORD {
   short   nifd;               /* INFORMAT NUMBER OF DECIMALS         */
 
   int     npos;               /* POSITION OF VALUE IN OBSERVATION    */
-  
+
   char    rest[52];           /* remaining fields are irrelevant     */
 };
 
@@ -157,18 +145,18 @@ void zeroFill(char *target, int len);
 void zeroCopy(char *target, int len, char *source);
 
 void fill_file_header(char **cDate, char **mDate, char **sasVer, char **osType);
-void fill_member_header(char **dfName, char **sasVer, char **osType, char **cDate, 
+void fill_member_header(char **dfName, char **sasVer, char **osType, char **cDate,
 			char **mDate, char **dfLabel, char **dfType);
 
-void fill_namestr(int  *isChar, int  *nlng, int  *nvar0, char **nname, char **nlabel, 
-		  char **nform, int  *nfl, int  *nfd, int  *nfj, char **niform, 
+void fill_namestr(int  *isChar, int  *nlng, int  *nvar0, char **nname, char **nlabel,
+		  char **nform, int  *nfl, int  *nfd, int  *nfj, char **niform,
 		  int  *nifl, int  *nifd, int  *npos);
 
 void fill_namestr_header(char **nvar);
 void fill_obs_header();
 
 void fill_numeric_field(double *value);
-void fill_character_field(char **value, int *width); 
+void fill_character_field(char **value, int *width);
 
 void fill_numeric_NA();
 void fill_space(int *type, int *width);
@@ -177,7 +165,6 @@ SEXP getRawBuffer();
 
 void doTest();
 
-void reverse( unsigned char *intp, size_t size);
 void ieee2ibm(register unsigned char *out, register const unsigned char *in, int count);
 
-#endif /* FIELDS_H */
+#endif /* WRITESAS_H */
