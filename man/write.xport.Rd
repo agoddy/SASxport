@@ -72,7 +72,7 @@ write.xport(...,
 \references{
   SAS Technical Support document TS-140: ``The Record Layout of a
   Data Set in SAS Transport (XPORT) Format'' available at
-  \url{http://ftp.sas.com/techsup/download/technote/ts140.html}.
+  \url{https://support.sas.com/techsup/technote/ts140.pdf}
 }
 \author{Gregory R. Warnes \email{greg@warnes.net}}
 \note{
@@ -104,29 +104,32 @@ abc
 SASformat(abc$x) <- 'date7.'
 
 ## add a variable label (not used by R)
-label(abc$y) <- 'character variable'
+Hmisc::label(abc$y) <- 'character variable'
 
 ## add a dataset label and type
-label(abc) <- 'Simple example'
+Hmisc::label(abc) <- 'Simple example'
 SAStype(abc) <- 'MYTYPE'
 
 ## verify the additions
 str(abc)
 
-# create a SAS XPORT file 
-write.xport( abc, file="xxx.dat" )
+# create a SAS XPORT file
+tmp <- tempfile(fileext = ".dat")
+write.xport( abc, file = tmp )
 
 # list the contents of the file
-lookup.xport("xxx.dat")
+\dontrun{
+lookup.xport(tmp)
+}
 
 ## reload the data
-xxx.abc <- read.xport("xxx.dat")
+xxx.abc <- read.xport(tmp)
 
 ## and look at it
 xxx.abc
 
 ## Check the label and type
-label(xxx.abc)
+Hmisc::label(xxx.abc)
 SAStype(xxx.abc)
 
 ## Note that the variable names and SAS dataset type have been converted

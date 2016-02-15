@@ -1,3 +1,6 @@
+
+#' @export
+
 makeSASNames <- function(names, nchar=8, maxPasses=10, quiet=FALSE)
   {
     ## This function takes a vector of potential SAS dataset or

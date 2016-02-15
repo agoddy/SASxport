@@ -7,6 +7,9 @@
 ## Determine if variable is a date, time, or date/time variable in R
 ## or S-Plus.  The following 2 functions are used by describe.vector
 ## timeUsed assumes is date/time combination variable and has no NAs
+
+#' @include AFirst_lib.R
+
 testDateTime <- function(x, what=c('either','both','timeVaries'))
 {
   what <- match.arg(what)

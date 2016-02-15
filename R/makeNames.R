@@ -4,6 +4,8 @@
 ## Copied with permission on 2007-08-04
 ##
 
+#' @include AFirst_lib.R
+
 makeNames <- function(names, unique=FALSE, allow=NULL)
 {
   ## Runs make.names with exceptions in vector allow

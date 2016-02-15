@@ -1,5 +1,10 @@
+
+#' @export
+
 SASiformat <- function(x, default)
   UseMethod("SASiformat")
+
+#' @export
 
 SASiformat.default <- function(x, default=NULL)
 {
@@ -10,8 +15,12 @@ SASiformat.default <- function(x, default=NULL)
   lab
 }
 
+#' @export
+
 "SASiformat<-" <- function(x, value)
   UseMethod("SASiformat<-")
+
+#' @export
 
 "SASiformat<-.default" <- function(x, value)
 {

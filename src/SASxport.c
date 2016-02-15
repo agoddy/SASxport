@@ -692,7 +692,6 @@ xport_read(SEXP xportFile, SEXP xportInfo)
   char *record, *tmpchar, *c;
   FILE *fp;
   SEXP ans, names, data, dataInfo, dataName;
-  double dbl;
 
   ansLength = LENGTH(xportInfo);
   PROTECT(ans = allocVector(VECSXP, ansLength));

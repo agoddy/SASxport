@@ -1,5 +1,10 @@
+
+#' @export
+
 SASformat <- function(x, default)
   UseMethod("SASformat")
+
+#' @export
 
 SASformat.default <- function(x, default=NULL)
 {
@@ -10,13 +15,19 @@ SASformat.default <- function(x, default=NULL)
   lab
 }
 
+#' @export
+
 SASformat.data.frame <- function(x, default=NULL)
 {
   sapply( x, SASformat)
 }
 
+#' @export
+
 "SASformat<-" <- function(x, value)
   UseMethod("SASformat<-")
+
+#' @export
 
 "SASformat<-.default" <- function(x, value)
 {
@@ -24,6 +35,7 @@ SASformat.data.frame <- function(x, default=NULL)
   x
 }
 
+#' @export
 
 "SASformat<-.data.frame" <- function(x, value)
 {

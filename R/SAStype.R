@@ -1,5 +1,10 @@
+
+#' @export
+
 SAStype <- function(x, default)
   UseMethod("SAStype")
+
+#' @export
 
 SAStype.default <- function(x, default=NULL)
 {
@@ -10,8 +15,12 @@ SAStype.default <- function(x, default=NULL)
   lab
 }
 
+#' @export
+
 "SAStype<-" <- function(x, value)
   UseMethod("SAStype<-")
+
+#' @export
 
 "SAStype<-.default" <- function(x, value)
 {

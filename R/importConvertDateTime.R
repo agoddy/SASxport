@@ -4,6 +4,8 @@
 ## Copied with permission on 2007-08-04
 ##
 
+#' @importFrom chron times chron
+
 importConvertDateTime <- 
   function(x, type=c('date','time','datetime'), input='sas', form)
 {

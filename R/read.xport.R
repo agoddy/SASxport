@@ -4,6 +4,10 @@
 ## Copied with permission on 2007-08-04
 ##
 
+#' @importFrom Hmisc label label<-
+#' @importFrom utils download.file
+#' @export
+
 read.xport <- function(file,
                        force.integer=TRUE,
                        formats=NULL,

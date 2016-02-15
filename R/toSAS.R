@@ -1,5 +1,10 @@
+
+#' @export
+
 toSAS <- function(x, format, format.info=NULL)
   UseMethod("toSAS")
+
+#' @export
 
 toSAS.numeric <- function(x, format=SASformat(x), format.info=NULL)
   {
@@ -8,6 +13,8 @@ toSAS.numeric <- function(x, format=SASformat(x), format.info=NULL)
     retval
   }
 
+#' @export
+
 toSAS.logical <- function(x, format=SASformat(x), format.info=NULL)
   {
     retval <- as.character(x)
@@ -15,6 +22,7 @@ toSAS.logical <- function(x, format=SASformat(x), format.info=NULL)
     retval
   }
   
+#' @export
 
 toSAS.character <- function(x, format=SASformat(x), format.info=NULL)
   {
@@ -22,6 +30,8 @@ toSAS.character <- function(x, format=SASformat(x), format.info=NULL)
     attr(retval, "SASformat")=format
     retval
   }
+
+#' @export
 
 toSAS.factor <- function(x, format=SASformat(x), format.info=NULL)
   {
@@ -40,6 +50,8 @@ toSAS.factor <- function(x, format=SASformat(x), format.info=NULL)
     retval
   }
 
+#' @export
+
 toSAS.POSIXt <- function( x, format="DATETIME16.", format.info=NULL)
   {
     sasBaseSeconds <- as.numeric(ISOdatetime(1960,1,1,0,0,0))
@@ -47,6 +59,8 @@ toSAS.POSIXt <- function( x, format="DATETIME16.", format.info=NULL)
     attr(retval,"SASformat") <- format
     retval
   }
+
+#' @export
 
 toSAS.Date <- function(x, format="DATE9.", format.info=NULL )
   {
@@ -56,11 +70,15 @@ toSAS.Date <- function(x, format="DATE9.", format.info=NULL )
     retval
   }
 
+#' @export
+
 toSAS.default <- function(x, format=SASformat(x), format.info=NULL)
   {
     retval <- as.character(x)
     attr(retval, "SASformat") <- format
     retval
   }
-    
+
+#' @export
+
 toSAS.chron <- toSAS.POSIXt

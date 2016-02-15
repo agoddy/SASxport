@@ -18,7 +18,7 @@
  *  This file is derived from code in the SAS Technical Support
  *  document TS-140 "The Record Layout of a Data Set in SAS Transport
  *  (XPORT) Format" available as
- *       http://ftp.sas.com/techsup/download/technote/ts140.html
+ *       https://support.sas.com/techsup/technote/ts140.pdf
  */
 
 #ifndef SASEXPORT_H

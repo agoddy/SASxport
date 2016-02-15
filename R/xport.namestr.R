@@ -52,7 +52,7 @@ xport.namestr <- function(
 
   ## Note that the variable name field in the xport file only permits
   ## 8 characters, so names will be truncated.
-  
+
   .C("fill_namestr",
      isChar = as.integer(isChar),              # Bool: Is this a character varible
      nlng   = as.integer(varLength),           # LENGTH OF VARIABLE IN OBSERVATION
