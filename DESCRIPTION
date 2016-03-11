@@ -1,6 +1,6 @@
 Package: SASxport
 Title: Read and Write 'SAS' 'XPORT' Files
-Version: 1.5.2
+Version: 1.5.3
 Description: Functions for reading, listing
     the contents of, and writing 'SAS' 'xport' format files.
     The functions support reading and writing of either
@@ -51,6 +51,6 @@ Collate: 'AFirst_lib.R' 'SASformat.R' 'SASiformat.R' 'SAStype.R'
         'xport.member.header.R' 'xport.namestr.R'
         'xport.namestr.header.R' 'xport.numeric.R' 'xport.obs.header.R'
 NeedsCompilation: yes
-Packaged: 2016-02-15 00:20:27 UTC; gaborcsardi
+Packaged: 2016-03-10 16:19:27 UTC; gaborcsardi
 Repository: CRAN
-Date/Publication: 2016-02-15 08:28:25
+Date/Publication: 2016-03-11 00:40:23

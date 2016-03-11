@@ -1,5 +1,5 @@
-f85214c81a96bedec34cf642f4716014 *DESCRIPTION
-94fc2382cc9c048520b4acfc4886c2b9 *NAMESPACE
+f566dfdf7052dda271332fc90914774a *DESCRIPTION
+4b532009a31c309401ed3d8f642a5429 *NAMESPACE
 7c1b5027d662c6360b026242722a3423 *R/AFirst_lib.R
 75b288cb8e5e45d1b4095a45d97254d1 *R/SASformat.R
 971e81f9c52e153e92a0750ee5e515f4 *R/SASiformat.R
@@ -18,7 +18,7 @@ f4263d9226a0181ef448170cc7189ca0 *R/make.formats.R
 07d28befb79e9877a5638427d1455810 *R/parseFormat.R
 c102e93851818b6155294581b08d30aa *R/process.formats.R
 ea08be1bc15e6dedd9981bd88a5e3ea8 *R/rawToDisplay.R
-e48b309446c94fbe95e5b7e2fe3acb32 *R/read.xport.R
+88f2682f64392ad6ac120ac160ef37cb *R/read.xport.R
 a5ea32bab219fd7c634f034dddada96b *R/scat.R
 4423bda73ec4625e96d4111ef191d2e2 *R/testDateTime.R
 aadb3a9c5b86d5063dcb9049128b82fc *R/toSAS.R
@@ -44,7 +44,7 @@ ef81330de18df33e09f1ad74bcd223cd *man/SASformat.Rd
 c15159187738e18556549d5b252982cc *man/SASxport-package.Rd
 78dbca98ea8bec0c41562820adf64277 *man/lookup.xport.Rd
 35d0e8e5eeb59fd81a7371bae3e5e292 *man/makeSASNames.Rd
-88bafc11ca7c72b924132852d4541b93 *man/read.xport.Rd
+235649f266b9ddc3969c7fb96c470a36 *man/read.xport.Rd
 9fa06818a2d83145eaacc2830d674559 *man/toSAS.Rd
 fe0b7761ba87beca4c6bca6a880d582b *man/write.xport.Rd
 d2b8598debf4bd23c1112916e5b056d6 *src/SASxport.c
