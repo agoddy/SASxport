@@ -2,7 +2,6 @@
 
 #' @export
 #' @importFrom utils download.file
-
 lookup.xport <- function(file)
   {
     fname <- file
@@ -22,16 +21,16 @@ lookup.xport <- function(file)
     ret
   }
 
-#' @export
 
+#' @export
 print.lookup.xport <- function(x, ...)
   {
     Sinfo <- summary(x, ...)
     print(Sinfo)
   }
 
-#' @export
 
+#' @export
 summary.lookup.xport <- function(object, ...)
   {
     subFun <- function(XX)
@@ -60,7 +59,6 @@ summary.lookup.xport <- function(object, ...)
   }
 
 #' @export
-
 print.summary.lookup.xport <- function(x, ...)
 {
   cat("\n")

@@ -4,7 +4,8 @@
 ## Copied with permission on 2007-08-04
 ##
 
-#' @importFrom Hmisc label label<- label<-.default label<-.data.frame
+#' @importFrom Hmisc label label<- makeNames
+#' @importFrom Hmisc importConvertDateTime importConvertDateTime
 #' @importFrom utils download.file
 #' @export
 
@@ -44,8 +45,8 @@ read.xport <- function(file,
 
     scat("Checking if the specified file has the appropriate header")
     xport.file.header <- "HEADER RECORD*******LIBRARY HEADER RECORD!!!!!!!000000000000000000000000000000  "
-    file.header <- readBin( file, what=character(0), n=1, size=nchar(xport.file.header) )
-    file.header <- substr(file.header, start=1, stop=nchar(xport.file.header) )
+    file.header <- readBin( file, what=character(0), n=1, size=nchar(xport.file.header, "bytes") )
+    file.header <- substr(file.header, start=1, stop=nchar(xport.file.header, "bytes") )
     if( !identical(xport.file.header, file.header) )
       stop("The specified file does not start with a SAS xport file header!")
 
@@ -161,13 +162,13 @@ read.xport <- function(file,
 
           if(is.numeric(x)) {
             if(fi %in% sasdateform) {
-              x <- importConvertDateTime(x, 'date', 'sas')
+              x <- importConvertDateTime(x, type='date', input='sas')
               changed <- TRUE
             } else if(fi %in% sastimeform) {
-              x <- importConvertDateTime(x, 'time', 'sas')
+              x <- importConvertDateTime(x, type='time', input='sas')
               changed <- TRUE
             } else if(fi %in% sasdatetimeform) {
-              x <- importConvertDateTime(x, 'datetime', 'sas')
+              x <- importConvertDateTime(x, type='datetime', input='sas')
               changed <- TRUE
             } else if(force.integer) {
               if(all(is.na(x))) {

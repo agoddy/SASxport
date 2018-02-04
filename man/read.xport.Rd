@@ -105,7 +105,7 @@ read.xport(file,
   functions.
 }
 \author{ Gregory R. Warnes \email{greg@warnes.net}
-  based on \code{Hmisc:::sasxport.get} by Frank E. Harrell, Jr.}
+  based on \code{Hmisc::sasxport.get} by Frank E. Harrell, Jr.}
 \section{Note}{
   This code provides a subset of the functionality of the
   \code{sasxport.get} function in the Hmisc library.
@@ -196,20 +196,15 @@ stopifnot( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 
 #### The Hmisc library provides many useful functions for interacting with
 #### data imported from SAS via read.xport()
+library(Hmisc)
 
-\dontrun{
-## For Hmisc version 3.14-5 (and presumably prior to that one) you will need to 
-## attach Hmisc. This is because describe and contents S3 methods' are not exported
-## Newer version of Hmisc fix the issue
+describe(w$TEST)   # see labels, format names for dataset test
+lapply(w, describe, "")# see descriptive stats in more detail for each variable
 
-Hmisc::describe(w$TEST)   # see labels, format names for dataset test
-lapply(w, Hmisc::describe)# see descriptive stats in more detail for each variable
+contents(w$TEST)   # another way to see variable attributes
+lapply(w, contents)# show contents of individual items in more detail
 
-Hmisc::contents(w$TEST)   # another way to see variable attributes
-lapply(w, Hmisc::contents)# show contents of individual items in more detail
-}
-
-## compare the following matrix with PROC MEANS output
+options(digits=7)  # compare the following matrix with PROC MEANS output
 t(sapply(w$Z, function(x)
  c(Mean=mean(x),SD=sqrt(var(x)),Min=min(x),Max=max(x))))
 

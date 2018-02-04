@@ -1,11 +1,9 @@
-
 #' @export
-
 toSAS <- function(x, format, format.info=NULL)
   UseMethod("toSAS")
 
-#' @export
 
+#' @export
 toSAS.numeric <- function(x, format=SASformat(x), format.info=NULL)
   {
     retval <- as.numeric(x)
@@ -13,17 +11,17 @@ toSAS.numeric <- function(x, format=SASformat(x), format.info=NULL)
     retval
   }
 
-#' @export
 
+#' @export
 toSAS.logical <- function(x, format=SASformat(x), format.info=NULL)
   {
     retval <- as.character(x)
     attr(retval, "SASformat")=format
     retval
   }
+
   
 #' @export
-
 toSAS.character <- function(x, format=SASformat(x), format.info=NULL)
   {
     retval <- as.character(x)
@@ -31,8 +29,8 @@ toSAS.character <- function(x, format=SASformat(x), format.info=NULL)
     retval
   }
 
-#' @export
 
+#' @export
 toSAS.factor <- function(x, format=SASformat(x), format.info=NULL)
   {
     finfo <- process.formats(format.info)
@@ -50,8 +48,8 @@ toSAS.factor <- function(x, format=SASformat(x), format.info=NULL)
     retval
   }
 
-#' @export
 
+#' @export
 toSAS.POSIXt <- function( x, format="DATETIME16.", format.info=NULL)
   {
     sasBaseSeconds <- as.numeric(ISOdatetime(1960,1,1,0,0,0))
@@ -60,8 +58,8 @@ toSAS.POSIXt <- function( x, format="DATETIME16.", format.info=NULL)
     retval
   }
 
-#' @export
 
+#' @export
 toSAS.Date <- function(x, format="DATE9.", format.info=NULL )
   {
     sasBase <- as.Date(strptime("01/01/1960", "%m/%d/%Y", tz="GMT")) # days
@@ -70,8 +68,8 @@ toSAS.Date <- function(x, format="DATE9.", format.info=NULL )
     retval
   }
 
-#' @export
 
+#' @export
 toSAS.default <- function(x, format=SASformat(x), format.info=NULL)
   {
     retval <- as.character(x)
@@ -79,6 +77,6 @@ toSAS.default <- function(x, format=SASformat(x), format.info=NULL)
     retval
   }
 
-#' @export
 
+#' @export
 toSAS.chron <- toSAS.POSIXt

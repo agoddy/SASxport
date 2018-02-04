@@ -18,7 +18,7 @@ write.xport(...,
  )
 }
 \arguments{
-  \item{\dots}{One or more data frames to be stored}  
+  \item{\dots}{One or more data frames to be stored}
   \item{list}{A list containing data frames to be stored.}
   \item{file}{File name or connection object. Use "" to view the raw data}
   \item{verbose}{Logical flag controlling whether status is reported
@@ -48,7 +48,7 @@ write.xport(...,
       point format (see the reference).
     \item Date and time variables are either converted to number of days since
       1960-01-01 (date only), or number of seconds since
-      1960-01-01:00:00:00 GMT (date-time variables).  
+      1960-01-01:00:00:00 GMT (date-time variables).
     \item Missing values are converted to the standard SAS missing value
       '.'
   }
@@ -77,7 +77,7 @@ write.xport(...,
 \author{Gregory R. Warnes \email{greg@warnes.net}}
 \note{
    This package was created with partial funding by Metrum Institute
-   \url{http://metruminstitute.org}. 
+   \url{http://metruminstitute.org}.
 }
 \seealso{
   \code{\link{toSAS}},
@@ -86,7 +86,7 @@ write.xport(...,
   \code{\link{label}},
   \code{\link{SAStype}},
   \code{\link{SASformat}},
-  and \code{\link{SASiformat}}  
+  and \code{\link{SASiformat}}
 }
 \examples{
 
@@ -104,10 +104,10 @@ abc
 SASformat(abc$x) <- 'date7.'
 
 ## add a variable label (not used by R)
-Hmisc::label(abc$y) <- 'character variable'
+label(abc$y) <- 'character variable'
 
 ## add a dataset label and type
-Hmisc::label(abc) <- 'Simple example'
+label(abc) <- 'Simple example'
 SAStype(abc) <- 'MYTYPE'
 
 ## verify the additions
@@ -118,9 +118,7 @@ tmp <- tempfile(fileext = ".dat")
 write.xport( abc, file = tmp )
 
 # list the contents of the file
-\dontrun{
 lookup.xport(tmp)
-}
 
 ## reload the data
 xxx.abc <- read.xport(tmp)
@@ -129,7 +127,7 @@ xxx.abc <- read.xport(tmp)
 xxx.abc
 
 ## Check the label and type
-Hmisc::label(xxx.abc)
+label(xxx.abc)
 SAStype(xxx.abc)
 
 ## Note that the variable names and SAS dataset type have been converted
