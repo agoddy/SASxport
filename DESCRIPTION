@@ -1,7 +1,7 @@
 Package: SASxport
 Title: Read and Write 'SAS' 'XPORT' Files
-Version: 1.5.7
-Date: 2018-02-03
+Version: 1.6.0
+Date: 2018-02-23
 Description: Functions for reading, listing
     the contents of, and writing 'SAS' 'xport' format files.
     The functions support reading and writing of either
@@ -43,6 +43,6 @@ URL: https://github.com/warnes/SASxport
 BugReports: https://github.com/warnes/SASxport/issues
 RoxygenNote: 6.0.1
 NeedsCompilation: yes
-Packaged: 2018-02-04 04:45:18 UTC; gwarnes
+Packaged: 2018-02-26 15:59:52 UTC; gwarnes
 Repository: CRAN
-Date/Publication: 2018-02-04 15:45:20 UTC
+Date/Publication: 2018-02-26 17:40:03 UTC
