@@ -1,5 +1,5 @@
 583bb8383bfa05ef05f6085360deef3d *ChangeLog
-f71b00f1af67301785c891f7b81ee113 *DESCRIPTION
+d9a12085395b1535d52240834e7b8862 *DESCRIPTION
 d2ff575baddd0e30b243cb9ad61f2c4a *NAMESPACE
 84d72778fd2bcd80086577f168cd9f9a *NEWS.md
 6b19c8d5f86744148dbf5c151309f5aa *R/SASformat.R
@@ -47,7 +47,7 @@ c15159187738e18556549d5b252982cc *man/SASxport-package.Rd
 192aec48072e454b26674acca683d671 *man/read.xport.Rd
 48412bb50eb78dad7edb55d396a354ef *man/reexports.Rd
 9fa06818a2d83145eaacc2830d674559 *man/toSAS.Rd
-c050d07e431332562f0b6c4dbced9fa0 *man/write.xport.Rd
+7e3219c1e707e6a76d3c5321e14bdfea *man/write.xport.Rd
 d2b8598debf4bd23c1112916e5b056d6 *src/SASxport.c
 f8d472394fd8d3e94837ea640d03e4b2 *src/SASxport.h
 3cb1a4820e3e61d1ac87ea2a37369993 *src/foreign.h
@@ -84,8 +84,8 @@ d4bee87cfaf88e4a4a78165b53978a9d *tests/testDuplicateNames.R
 4bbf876b0020abe1797b0ff463afaa15 *tests/testDuplicateNames.Rout.save
 c76ba2c417bd1d51b03db1d23bc9d831 *tests/testEmpty.R
 10b95318ddd5fb8c78a18e40064211e1 *tests/testEmpty.Rout.save
-ece4a71c398c04aecd959d9eb65b9cff *tests/testExamples.R
-ddde05e29291a872689126ed6d257e4a *tests/testExamples.Rout.save
+75a6882c89e4c65207194d3480b89038 *tests/testExamples.R
+48523e28da0d495b332178ca00927a5b *tests/testExamples.Rout.save
 9c35e2767461d7c7e4dad80e76c03830 *tests/testFactorAllNA.R
 f54fe49336a92d9115c6100e316c52c8 *tests/testManyNames.R
 144cab786310d71c5f5fa5e39fa789d9 *tests/testManyNames.Rout.save
@@ -94,7 +94,7 @@ d3c8b74a633c5277b710e21d9e6bae8b *tests/testNegative.Rout.save
 56f90475ee6618a614651f0f1657330f *tests/testNumeric.R
 e9e4819ffd0468237fe02fbb8eb1467d *tests/testNumeric.Rout.save
 b5850769746135aaea79f1572416d8de *tests/testUnnamedComponents.R
-e6f0eed09743b89857eaf1e0fd3978ce *tests/testUnnamedComponents.Rout.save
+4e350e5e8265d9b2d1c6b95c13ce22b1 *tests/testUnnamedComponents.Rout.save
 babc6b483410dc6a1f9c7c9b47e21416 *tests/test_as_is.R
 f1159272c1293befba58f8a27dd72e4c *tests/test_as_is.Rout.save
 5c5f78f4605af6c7787934afde0b37da *tests/test_fields.R

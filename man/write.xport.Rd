@@ -118,7 +118,9 @@ tmp <- tempfile(fileext = ".dat")
 write.xport( abc, file = tmp )
 
 # list the contents of the file
+## IGNORE_RDIFF_BEGIN
 lookup.xport(tmp)
+## IGNORE_RDIFF_END
 
 ## reload the data
 xxx.abc <- read.xport(tmp)
