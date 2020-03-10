@@ -24,11 +24,11 @@ write.xport(...,
   \item{verbose}{Logical flag controlling whether status is reported
     during processing}
   \item{sasVer}{SAS version string}
-  \item{osType}{Opererating system, defaults to "R X.Y.Z" for
+  \item{osType}{Operating system, defaults to "R X.Y.Z" for
     appropriate values of X, Y, and Z}
   \item{cDate}{Date object specifying dataset creation date}
   \item{formats}{Optional data frame containing SAS format information.}
-  \item{autogen.formats}{Logical indiciating whether SAS formats should be
+  \item{autogen.formats}{Logical indicating whether SAS formats should be
     auto-generated for factor variables.}
 }
 \details{
@@ -95,7 +95,11 @@ write.xport(...,
 #####
 
 ## manually create a data set
-abc <- data.frame( x=c(1, 2, NA, NA ), y=c('a', 'B', NA, '*' ) )
+abc <- data.frame(
+  x=c(1, 2, NA, NA),
+  y=c('a', 'B', NA, '*'),
+  stringsAsFactors=TRUE
+  )
 
 ## look at it
 abc
@@ -118,9 +122,7 @@ tmp <- tempfile(fileext = ".dat")
 write.xport( abc, file = tmp )
 
 # list the contents of the file
-## IGNORE_RDIFF_BEGIN
 lookup.xport(tmp)
-## IGNORE_RDIFF_END
 
 ## reload the data
 xxx.abc <- read.xport(tmp)

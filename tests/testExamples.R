@@ -1,6 +1,6 @@
 library(SASxport)
 Sys.setenv("TZ"="GMT")
-Sys.setlocale(locale="C") -> junk ## do not print old value
+Sys.setlocale(locale="C")
 
 set.seed(42)
 

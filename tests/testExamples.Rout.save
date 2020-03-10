@@ -1,7 +1,7 @@
 
-R version 3.6.2 Patched (2020-01-13 r77669) -- "Dark and Stormy Night"
-Copyright (C) 2020 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -17,7 +17,8 @@ Type 'q()' to quit R.
 
 > library(SASxport)
 > Sys.setenv("TZ"="GMT")
-> Sys.setlocale(locale="C") -> junk ## do not print old value
+> Sys.setlocale(locale="C")
+[1] "C/C/C/C/C/en_US.UTF-8"
 > 
 > set.seed(42)
 > 
@@ -104,7 +105,7 @@ $SASiformat
 
 
 SASfrm> ## SAStype only applies to data frames
-SASfrm> df <- data.frame( fail.time, day=c("Mon","Tue") )
+SASfrm> df <- data.frame( fail.time, day=c("Mon","Tue"), stringsAsFactors=TRUE )
 
 SASfrm> SAStype(df) <- "USER"
 
@@ -125,7 +126,7 @@ lkp.xp> lookup.xport(alfFile)
 
 SAS xport file
 --------------
-Filename: `.../SASxport/extdata/Alfalfa.xpt'
+Filename: `/Users/gwarnes/src/SASxport.Rcheck/SASxport/extdata/Alfalfa.xpt'
 
 Variables in data set `SPEC':
  dataset   name      type format flength fdigits iformat iflength ifdigits
@@ -159,7 +160,7 @@ lkp.xp> w
 
 SAS xport file
 --------------
-Filename: `.../SASxport/extdata/test2.xpt'
+Filename: `/Users/gwarnes/src/SASxport.Rcheck/SASxport/extdata/test2.xpt'
 
 Variables in data set `TEST':
  dataset name    type   format flength fdigits iformat iflength ifdigits
@@ -253,7 +254,7 @@ lkp.xp> wS # same display
 
 SAS xport file
 --------------
-Filename: `.../SASxport/extdata/test2.xpt'
+Filename: `/Users/gwarnes/src/SASxport.Rcheck/SASxport/extdata/test2.xpt'
 
 Variables in data set `TEST':
  dataset name    type   format flength fdigits iformat iflength ifdigits
@@ -964,7 +965,11 @@ wrt.xp> ## R version of the example given in TS-140
 wrt.xp> #####
 wrt.xp> 
 wrt.xp> ## manually create a data set
-wrt.xp> abc <- data.frame( x=c(1, 2, NA, NA ), y=c('a', 'B', NA, '*' ) )
+wrt.xp> abc <- data.frame(
+wrt.xp+   x=c(1, 2, NA, NA),
+wrt.xp+   y=c('a', 'B', NA, '*'),
+wrt.xp+   stringsAsFactors=TRUE
+wrt.xp+   )
 
 wrt.xp> ## look at it
 wrt.xp> abc
@@ -1001,12 +1006,11 @@ wrt.xp> tmp <- tempfile(fileext = ".dat")
 wrt.xp> write.xport( abc, file = tmp )
 
 wrt.xp> # list the contents of the file
-wrt.xp> ## IGNORE_RDIFF_BEGIN
 wrt.xp> lookup.xport(tmp)
 
 SAS xport file
 --------------
-Filename: `/tmp/RtmpEZQgPe/file324b686a2ca.dat'
+Filename: `/var/folders/v8/3b2_t61j33x_32bbdf54rkc5d0dc9b/T//Rtmp01iEyq/fileab5fa1d474a.dat'
 
 Variables in data set `ABC':
  dataset name    type format flength fdigits iformat iflength ifdigits
@@ -1063,8 +1067,6 @@ Variables in data set `FORMATS':
           3
 
 
-wrt.xp> ## IGNORE_RDIFF_END
-wrt.xp> 
 wrt.xp> ## reload the data
 wrt.xp> xxx.abc <- read.xport(tmp)
 
@@ -1094,4 +1096,4 @@ wrt.xp>
 > 
 > proc.time()
    user  system elapsed 
-  4.616   0.495   5.127 
+  1.516   0.176   1.688 
