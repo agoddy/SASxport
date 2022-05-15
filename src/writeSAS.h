@@ -82,11 +82,11 @@ struct MEMBER_HEADER {
 
   /* Line 3 */
   char sas_symbol[8];
-  char sas_dsname[8];
+  char sas_dsname[32];
   char sasdata[8];
   char sasver[8];
   char sas_osname[8];
-  char blanks[24];
+  //char blanks[24];
   char sas_create[16];
 
   /* Line 4 */
@@ -100,8 +100,8 @@ struct MEMBER_HEADER {
 
 struct NAMESTR_HEADER {
   char l1[54];
-  char nvar[4];
-  char zeros[22];
+  char nvar[6];
+  char zeros[20];
 };
 
 
@@ -126,12 +126,16 @@ struct NAMESTR_RECORD {
 
   int     npos;               /* POSITION OF VALUE IN OBSERVATION    */
 
-  char    rest[52];           /* remaining fields are irrelevant     */
+  char    nlongname[32];          /* long name for Version 8- style */
+  short   nlablen;               /* length of label */
+  char    rest[18];           /* remaining fields are irrelevant     */
 };
 
 
 struct OBS_HEADER {
-  char l1[80];
+  char l1[48];
+  char nvar[15];
+  char l3[17];
 };
 
 /*****
@@ -153,7 +157,7 @@ void fill_namestr(int  *isChar, int  *nlng, int  *nvar0, char **nname, char **nl
 		  int  *nifl, int  *nifd, int  *npos);
 
 void fill_namestr_header(char **nvar);
-void fill_obs_header();
+void fill_obs_header(char **nvar);
 
 void fill_numeric_field(double *value);
 void fill_character_field(char **value, int *width);

@@ -217,6 +217,7 @@ write.xport <- function(...,
                               iName   = iFormatInfo$name,
                               iLength = iFormatInfo$len,
                               iDigits = iFormatInfo$digits,
+                              lVarName = i
                               )
                 )
 
@@ -233,7 +234,7 @@ write.xport <- function(...,
         out( xport.fill( TRUE, fillSize ) )
 
         scat("Write header for data block ...")
-        out( xport.obs.header() )
+        out( xport.obs.header(nvar=nrow(df)) )
         scat("Done")
 
         scat("Write data ... ");

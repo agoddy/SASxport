@@ -40,6 +40,7 @@ ARGTYPE fill_namestr_header_args[] = { STRSXP };
 ARGTYPE fill_numeric_field_args[]  = { REALSXP };
 ARGTYPE fill_character_field_args[]= { STRSXP, INTSXP };
 ARGTYPE fill_space_args[]          = { INTSXP, INTSXP };
+ARGTYPE fill_obs_header_args[] = {STRSXP};
 
 #define CDEF(name, narg, argVec)  { #name, (DL_FUNC) &name, narg, argVec }
 static const R_CMethodDef CEntries[]  = {
@@ -47,7 +48,7 @@ static const R_CMethodDef CEntries[]  = {
   CDEF(fill_member_header,   7, fill_member_header_args  ),
   CDEF(fill_namestr,        13, fill_namestr_args        ),
   CDEF(fill_namestr_header,  1, fill_namestr_header_args ),
-  CDEF(fill_obs_header,      0, 0                        ),
+  CDEF(fill_obs_header,      1, fill_obs_header_args ),
   CDEF(fill_numeric_field,   1, fill_numeric_field_args  ),
   CDEF(fill_character_field, 2, fill_character_field_args),
   CDEF(fill_numeric_NA,      0, 0                        ),

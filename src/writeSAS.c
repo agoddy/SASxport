@@ -120,7 +120,7 @@ void fill_file_header(
   struct FILE_HEADER file_header;
 
   /* Line 1 */
-  blankCopy( file_header.h1, 80, "HEADER RECORD*******LIBRARY HEADER RECORD!!!!!!!000000000000000000000000000000  ");
+  blankCopy( file_header.h1, 80, "HEADER RECORD*******LIBV8 HEADER RECORD!!!!!!!000000000000000000000000000000  ");
 
   /* Line 2*/
   blankCopy( file_header.sas_symbol1,  8,  "SAS      ");
@@ -147,7 +147,7 @@ void fill_file_header(
 
 void fill_member_header(
 			char **dfName,  /* Name of data set   */
-  		        char **sasVer,  /* SAS version number */
+  		char **sasVer,  /* SAS version number */
 			char **osType,  /* Operating System   */
 			char **cDate,   /* Creation date      */
 			char **mDate,   /* Modification date  */
@@ -158,18 +158,18 @@ void fill_member_header(
   struct MEMBER_HEADER member_header;
 
   /* Line 1 */
-  blankCopy( member_header.l1, 80,  "HEADER RECORD*******MEMBER  HEADER RECORD!!!!!!!000000000000000001600000000140  ");
+  blankCopy( member_header.l1, 80,  "HEADER RECORD*******MEMBV8  HEADER RECORD!!!!!!!000000000000000001600000000140  ");
 
   /* Line 2 */
-  blankCopy( member_header.l2, 80,  "HEADER RECORD*******DSCRPTR HEADER RECORD!!!!!!!000000000000000000000000000000  ");
+  blankCopy( member_header.l2, 80,  "HEADER RECORD*******DSCPTV8 HEADER RECORD!!!!!!!000000000000000000000000000000  ");
 
   /* Line 3 */
   blankCopy( member_header.sas_symbol,   8,    "SAS      ");
-  blankCopy( member_header.sas_dsname,   8,    dfName[0]  );
+  blankCopy( member_header.sas_dsname,   32,    dfName[0]  );
   blankCopy( member_header.sasdata,      8,    "SASDATA  ");
   blankCopy( member_header.sasver,       8,    sasVer[0]  );
   zeroCopy ( member_header.sas_osname,   8,    osType[0]  );
-  blankFill( member_header.blanks,      24);
+  //blankFill( member_header.blanks,      24);
   blankCopy( member_header.sas_create,  16,    cDate[0]   );
 
   /* Line 4 */
@@ -196,9 +196,9 @@ void fill_namestr_header(
 {
   struct NAMESTR_HEADER namestr_header;
 
-  blankCopy( namestr_header.l1,    54, "HEADER RECORD*******NAMESTR HEADER RECORD!!!!!!!000000");
-  blankCopy( namestr_header.nvar,   4, nvar[0] );
-  blankCopy( namestr_header.zeros, 22, "00000000000000000000  ");
+  blankCopy( namestr_header.l1,    54, "HEADER RECORD*******NAMSTV8 HEADER RECORD!!!!!!!000000");
+  blankCopy( namestr_header.nvar,   6, nvar[0]);
+  blankCopy( namestr_header.zeros, 20, "00000000000000000000  ");
 
   /* Copy over for return */
   memcpy( raw_buffer, &namestr_header, sizeof(namestr_header) );
@@ -228,6 +228,10 @@ void fill_namestr(
 		  int  *nifl,               /* INFORMAT LENGTH ATTRIBUTE           */
 		  int  *nifd,               /* INFORMAT NUMBER OF DECIMALS         */
 		  int  *npos                /* POSITION OF VALUE IN OBSERVATION    */
+      
+      //char **nlongname,          /* long name for Version 8- style */
+      //int   *nlablen               /* length of label */
+      // char    rest[18];           /* Version 8 remaining fields are irrelevant     */
 
 	      //  char rest[52],            /* remaining fields are irrelevant     */
 		  )
@@ -253,7 +257,15 @@ void fill_namestr(
   namestr_record.nifd  = (short) *nifd;            /* INFORMAT NUMBER OF DECIMALS         */
   namestr_record.npos  = (int)  *npos;             /* POSITION OF VALUE IN OBSERVATION    */
 
-  zeroFill(namestr_record.rest, 52);               /* remaining fields are irrelevant     */
+  blankCopy(namestr_record.nlongname, 32, nname[0]);  /* NAME OF VARIABLE */
+  namestr_record.nlablen  = (short) 40;            /* LENGTH OF LABEL */
+  
+  
+  
+  
+  
+
+  zeroFill(namestr_record.rest, 18);               /* remaining fields are irrelevant     */
 
 
   TO_BIGEND_SHORT( namestr_record.ntype );
@@ -265,8 +277,11 @@ void fill_namestr(
   TO_BIGEND_SHORT( namestr_record.nfj   );
   TO_BIGEND_SHORT( namestr_record.nifl  );
   TO_BIGEND_SHORT( namestr_record.nifd  );
+  
 
   TO_BIGEND_INT  ( namestr_record.npos  );
+  
+  TO_BIGEND_SHORT( namestr_record.nlablen  );
 
   /* copy filled struct to return area */
   memcpy( raw_buffer, &namestr_record, sizeof(namestr_record) );
@@ -278,12 +293,15 @@ void fill_namestr(
 }
 
 
-void fill_obs_header()
+void fill_obs_header(char **nvar)
 {
   struct OBS_HEADER obs_header;
 
-  blankCopy( obs_header.l1, 80,
-	     "HEADER RECORD*******OBS     HEADER RECORD!!!!!!!000000000000000000000000000000  ");
+  blankCopy( obs_header.l1, 48,
+	     "HEADER RECORD*******OBSV8   HEADER RECORD!!!!!!!");
+  blankCopy( obs_header.nvar, 15, nvar[0]);
+  blankFill( obs_header.l3, 17);
+  
 
   /* copy filled struct to return area */
   memcpy( raw_buffer, &obs_header, sizeof(obs_header) );

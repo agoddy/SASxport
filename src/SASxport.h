@@ -64,7 +64,7 @@ struct SAS_XPORT_namestr {
     short   nvar0;              /* VARNUM                              */
     char    nname[8];		/* NAME OF VARIABLE                    */
     char    nlabel[40];		/* LABEL OF VARIABLE                   */
-    char    nform[8];		/* NAME OF FORMAT                      */
+    char    nform[32];		/* NAME OF FORMAT                      */
     short   nfl;                /* FORMAT FIELD LENGTH OR 0            */
     short   nfd;                /* FORMAT NUMBER OF DECIMALS           */
     short   nfj;                /* 0=LEFT JUSTIFICATION, 1=RIGHT JUST  */
@@ -72,9 +72,15 @@ struct SAS_XPORT_namestr {
     char    niform[8];		/* NAME OF INPUT FORMAT                */
     short   nifl;               /* INFORMAT LENGTH ATTRIBUTE           */
     short   nifd;               /* INFORMAT NUMBER OF DECIMALS         */
-    int     npos;               /* POSITION OF VALUE IN OBSERVATION    */
-    char    rest[52];           /* remaining fields are irrelevant     */
+    int     npos;               /* POSITION OF VALUE IN OBSERVATION */  
+    char    nlongname[32];          /* long name for Version 8- style */
+    short   nlablen;               /* length of label */
+    char    rest[18];           /* remaining fields are irrelevant     */
+    
 };
+
+
+
 
 #ifdef WORDS_BIGENDIAN
 

@@ -16,7 +16,7 @@ makeSASNames <- function(names, nchar=8, maxPasses=10, quiet=FALSE)
     names <- toupper(names)
     
     # Step 1: expand/truncate to 8 characters
-    tooLong <- nchar(names, "bytes")>8
+    tooLong <- nchar(names, "bytes")>32
     if (any(tooLong))
       {
         shortNames <- substr(as.character(names), 1, nchar)

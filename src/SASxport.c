@@ -31,11 +31,11 @@
 #include "SASxport.h"
 
 #define HEADER_BEG "HEADER RECORD*******"
-#define HEADER_TYPE_LIBRARY "LIBRARY "
-#define HEADER_TYPE_MEMBER "MEMBER  "
-#define HEADER_TYPE_DSCRPTR "DSCRPTR "
-#define HEADER_TYPE_NAMESTR "NAMESTR "
-#define HEADER_TYPE_OBS "OBS     "
+#define HEADER_TYPE_LIBRARY "LIBV8 "
+#define HEADER_TYPE_MEMBER "MEMBV8  "
+#define HEADER_TYPE_DSCRPTR "DSCPTV8 "
+#define HEADER_TYPE_NAMESTR "NAMSTV8 "
+#define HEADER_TYPE_OBS "OBSV8     "
 #define HEADER_END "HEADER RECORD!!!!!!!000000000000000000000000000000  "
 
 #define LIB_HEADER HEADER_BEG HEADER_TYPE_LIBRARY HEADER_END
@@ -136,6 +136,8 @@ get_nam_header(FILE *fp, struct SAS_XPORT_namestr *namestr, int length)
   char_to_short(record+80, namestr->nifl);
   char_to_short(record+82, namestr->nifd);
   char_to_int(record+84, namestr->npos);
+  memcpy(namestr->nlongname, record + 88, 32);
+  char_to_short(record+120, namestr->nlablen);
   return 1;
 }
 
@@ -214,6 +216,7 @@ init_xport_info(FILE *fp)
   int n;
   int namestr_length;
 
+
   struct SAS_XPORT_header *lib_head;
 
   lib_head = Calloc(1, struct SAS_XPORT_header);
@@ -263,8 +266,8 @@ init_mem_info(FILE *fp, char *name, char *dslabel, char *dstype)
   tmp = strchr(mem_head->sas_dsname, ' ');
   n = (int)(tmp - mem_head->sas_dsname);
   if(n > 0) {
-    if (n > 8)
-      n = 8;
+    if (n > 32)
+      n = 32;
     strncpy(name, mem_head->sas_dsname, n);
     name[n] = '\0';
   } else name[0] = '\0';
@@ -308,7 +311,10 @@ next_xport_info(FILE *fp,
 		SEXP niform,
 		int *nifl,
 		int *nifd,
-		int *npos)
+		int *npos,
+    SEXP nlongname,
+    int *nlablen
+)
 {
   char *tmp;
   char record[81];
@@ -342,7 +348,7 @@ next_xport_info(FILE *fp,
   }
 
   for(i = 0; i < nvars; i++) {
-    int nname_len = 0, nlabel_len = 0, nform_len = 0, niform_len=0;
+    int nname_len = 0, nlabel_len = 0, nform_len = 0, niform_len=0, nlongname_len = 0;
     char tmpname[41];
 
     /* Variable storage type */
@@ -372,6 +378,19 @@ next_xport_info(FILE *fp,
     strncpy(tmpname, nam_head[i].nlabel, nlabel_len);
     tmpname[nlabel_len] = '\0';
     SET_STRING_ELT(nlabel, i, mkChar(tmpname));
+
+
+      /* Long Variable Name */
+    nlongname_len = 32;
+    while (nlongname_len && nam_head[i].nlongname[nlongname_len-1] == ' ')
+      nlongname_len--;
+    strncpy(tmpname, nam_head[i].nlongname, nlongname_len);
+    tmpname[nlongname_len] = '\0';
+    SET_STRING_ELT(nlongname, i, mkChar(tmpname));
+
+
+
+
 
     /* Variable format name */
     nform_len = 8;
@@ -505,7 +524,7 @@ getListElement(SEXP list, char *str) {
   return elmt;
 }
 
-#define VAR_INFO_LENGTH 16
+#define VAR_INFO_LENGTH 17
 
 const char *cVarInfoNames[VAR_INFO_LENGTH] = {
   "headpad",
@@ -523,7 +542,8 @@ const char *cVarInfoNames[VAR_INFO_LENGTH] = {
   "ifdigits",
   "sexptype",
   "tailpad",
-  "length"
+  "length",
+  "longname"
 };
 
 #define XPORT_VAR_HEADPAD(varinfo)   VECTOR_ELT(varinfo, 0)
@@ -542,6 +562,8 @@ const char *cVarInfoNames[VAR_INFO_LENGTH] = {
 #define XPORT_VAR_SEXPTYPE(varinfo)  VECTOR_ELT(varinfo, 13)
 #define XPORT_VAR_TAILPAD(varinfo)   VECTOR_ELT(varinfo, 14)
 #define XPORT_VAR_LENGTH(varinfo)    VECTOR_ELT(varinfo, 15)
+#define XPORT_VAR_LNAME(varinfo)     VECTOR_ELT(varinfo, 16)
+#define XPORT_VAR_LLENGTH(varinfo)   VECTOR_ELT(varinfo, 17)
 
 #define SET_XPORT_VAR_HEADPAD(varinfo, val)   SET_VECTOR_ELT(varinfo, 0, val)
 #define SET_XPORT_VAR_TYPE(varinfo, val)      SET_VECTOR_ELT(varinfo, 1, val)
@@ -559,7 +581,8 @@ const char *cVarInfoNames[VAR_INFO_LENGTH] = {
 #define SET_XPORT_VAR_SEXPTYPE(varinfo, val)  SET_VECTOR_ELT(varinfo, 13, val)
 #define SET_XPORT_VAR_TAILPAD(varinfo, val)   SET_VECTOR_ELT(varinfo, 14, val)
 #define SET_XPORT_VAR_LENGTH(varinfo, val)    SET_VECTOR_ELT(varinfo, 15, val)
-
+#define SET_XPORT_VAR_LNAME(varinfo, val)     SET_VECTOR_ELT(varinfo, 16, val)
+#define SET_XPORT_VAR_LLENGTH(varinfo, val)   SET_VECTOR_ELT(varinfo, 17, val)
 
 SEXP
 xport_info(SEXP xportFile)
@@ -625,7 +648,7 @@ xport_info(SEXP xportFile)
       SET_XPORT_VAR_TAILPAD(varInfo, allocVector(INTSXP, 1));
       SET_XPORT_VAR_LENGTH(varInfo, allocVector(INTSXP, 1));
 
-      namestrLength =
+      namestrLength = 
 	next_xport_info(fp, namestrLength, memLength,
 			INTEGER(XPORT_VAR_HEADPAD(varInfo)),
 			INTEGER(XPORT_VAR_TAILPAD(varInfo)),
@@ -641,7 +664,10 @@ xport_info(SEXP xportFile)
 			XPORT_VAR_IFORM(varInfo),
 			INTEGER(XPORT_VAR_IFLENGTH(varInfo)),
 			INTEGER(XPORT_VAR_IFDIGITS(varInfo)),
-			INTEGER(XPORT_VAR_POSITION(varInfo))
+			INTEGER(XPORT_VAR_POSITION(varInfo)),
+			XPORT_VAR_LNAME(varInfo),
+			INTEGER(XPORT_VAR_LLENGTH(varInfo))
+			
 			);
 
       for(i = 0; i < memLength; i++) {
