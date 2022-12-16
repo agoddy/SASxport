@@ -207,7 +207,7 @@ write.xport <- function(...,
             if(is.character(var) & is.null(varLen)){    # compute variable length
             print('found no varlength')
             #   varLen <- attr(var, 'varLength')
-            
+            varLen <- 20
               
             if (varLen > 200){
               print('found')
@@ -239,7 +239,8 @@ write.xport <- function(...,
             iFormatInfo <- parseFormat(varIFormat)
             
             lablen <- nchar(varLabel, 'bytes', keepNA = F)
-            if (lablen > 40){
+            
+            if (!is_empty(lablen)&(lablen > 40)){
               nof_long_labels <- nof_long_labels +1
               name_label <- paste0(toupper(as.character(i)), as.character(varLabel))
               varName = toupper(as.character(i))
