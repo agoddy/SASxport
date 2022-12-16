@@ -126,11 +126,26 @@ struct NAMESTR_RECORD {
 
   int     npos;               /* POSITION OF VALUE IN OBSERVATION    */
 
-  char    nlongname[32];          /* long name for Version 8- style */
-  short   nlablen;               /* length of label */
+  char    nlongname[32];      /* long name for Version 8- style      */
+  short   nlablen;            /* length of label                     */
   char    rest[18];           /* remaining fields are irrelevant     */
 };
 
+struct LABEL8_HEADER {
+  char l1[48];
+  char nvar[15];
+  char l3[17];
+};
+
+struct LABEL8_RECORD {
+  
+  
+  short   varNum;              /* VARNUM                               */
+  short   namLen;               /* LENGTH OF LABEL IN BYTES             */
+  short   labLen;               /* LENGTH OF VARIABLE NAME IN BYTES     */
+  char    varName[74];        /* LABEL OF VARIABLE  IN BYTES          */
+  
+};
 
 struct OBS_HEADER {
   char l1[48];
@@ -154,9 +169,15 @@ void fill_member_header(char **dfName, char **sasVer, char **osType, char **cDat
 
 void fill_namestr(int  *isChar, int  *nlng, int  *nvar0, char **nname, char **nlabel,
 		  char **nform, int  *nfl, int  *nfd, int  *nfj, char **niform,
-		  int  *nifl, int  *nifd, int  *npos);
+		  int  *nifl, int  *nifd, int  *npos, int *nlablen);
 
 void fill_namestr_header(char **nvar);
+
+
+void fill_label8(char **varName, int *varNum, int *namLen, int  *labLen, int  *totlen);
+
+void fill_label8_header(char **nvar);
+
 void fill_obs_header(char **nvar);
 
 void fill_numeric_field(double *value);

@@ -1,7 +1,7 @@
 Package: SASxport
 Title: Read and Write 'SAS' 'XPORT' Files
-Version: 1.7.0
-Date: 2020-03-06
+Version: 1.8.1.3
+Date: 2022-05-22
 Description: Functions for reading, listing
     the contents of, and writing 'SAS' 'xport' format files.
     The functions support reading and writing of either
@@ -40,10 +40,10 @@ Language: en-US
 Depends: R (>= 3.3.0)
 Imports: Hmisc, utils, stringi
 Enhances: chron
-URL: https://github.com/warnes/SASxport
-BugReports: https://github.com/warnes/SASxport/issues
+URL: https://github.com/agoddy/SASxport
+BugReports: https://github.com/agoddy/SASxport/issues
 RoxygenNote: 7.0.2
 NeedsCompilation: yes
-Packaged: 2020-03-10 02:50:33 UTC; gwarnes
+Packaged: 2020-03-10 02:50:33 UTC; agoddy
 Repository: CRAN
 Date/Publication: 2020-03-10 06:50:17 UTC

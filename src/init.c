@@ -35,9 +35,19 @@ ARGTYPE fill_member_header_args[]  = { STRSXP, STRSXP, STRSXP, STRSXP, STRSXP, S
 				       STRSXP };
 ARGTYPE fill_namestr_args[]        = { INTSXP, INTSXP, INTSXP, STRSXP, STRSXP, 
 				       STRSXP, INTSXP, INTSXP, INTSXP, STRSXP, 
-				       INTSXP, INTSXP, INTSXP };
+				       INTSXP, INTSXP, INTSXP, INTSXP };
 ARGTYPE fill_namestr_header_args[] = { STRSXP };
+
+
+ARGTYPE fill_label8_args[]  = { STRSXP, INTSXP, INTSXP, INTSXP, INTSXP };
+ARGTYPE fill_label8_header_args[] = { STRSXP };
+
+
 ARGTYPE fill_numeric_field_args[]  = { REALSXP };
+
+
+
+
 ARGTYPE fill_character_field_args[]= { STRSXP, INTSXP };
 ARGTYPE fill_space_args[]          = { INTSXP, INTSXP };
 ARGTYPE fill_obs_header_args[] = {STRSXP};
@@ -46,8 +56,10 @@ ARGTYPE fill_obs_header_args[] = {STRSXP};
 static const R_CMethodDef CEntries[]  = {
   CDEF(fill_file_header,     4, fill_file_header_args    ),
   CDEF(fill_member_header,   7, fill_member_header_args  ),
-  CDEF(fill_namestr,        13, fill_namestr_args        ),
+  CDEF(fill_namestr,        14, fill_namestr_args        ),
   CDEF(fill_namestr_header,  1, fill_namestr_header_args ),
+  CDEF(fill_label8,          5, fill_label8_args        ),
+  CDEF(fill_label8_header,   1, fill_label8_header_args ),
   CDEF(fill_obs_header,      1, fill_obs_header_args ),
   CDEF(fill_numeric_field,   1, fill_numeric_field_args  ),
   CDEF(fill_character_field, 2, fill_character_field_args),

@@ -227,7 +227,8 @@ void fill_namestr(
 		  char **niform,            /* NAME OF INPUT FORMAT                */
 		  int  *nifl,               /* INFORMAT LENGTH ATTRIBUTE           */
 		  int  *nifd,               /* INFORMAT NUMBER OF DECIMALS         */
-		  int  *npos                /* POSITION OF VALUE IN OBSERVATION    */
+		  int  *npos,                /* POSITION OF VALUE IN OBSERVATION    */
+      int *nlablen
       
       //char **nlongname,          /* long name for Version 8- style */
       //int   *nlablen               /* length of label */
@@ -258,7 +259,7 @@ void fill_namestr(
   namestr_record.npos  = (int)  *npos;             /* POSITION OF VALUE IN OBSERVATION    */
 
   blankCopy(namestr_record.nlongname, 32, nname[0]);  /* NAME OF VARIABLE */
-  namestr_record.nlablen  = (short) 40;            /* LENGTH OF LABEL */
+  namestr_record.nlablen  = (short) *nlablen;            /* LENGTH OF LABEL */
   
   
   
@@ -289,6 +290,67 @@ void fill_namestr(
   /* Set size for return */
   raw_buffer_used = 140;
 
+  return;
+}
+
+
+
+
+
+
+
+void fill_label8(char **varName, int *varNum, int *labLen, int  *namLen, int  *totLen){
+   
+
+
+   
+   
+  struct LABEL8_RECORD label8_record;
+  
+  
+  
+  label8_record.namLen  = (short) *namLen;            /* LENGTH OF VARIABLE NAME   */
+  label8_record.varNum = (short) *varNum;           /* VARNUM                    */
+  label8_record.labLen = (short) *labLen;             /* LENGTH OF LABEL           */
+  //label8_record.varName = varName;
+  blankCopy(label8_record.varName, (*totLen - 6),varName[0]); /* NAME OF VARIABLE                    */
+  //strcpy(label8_record.varName, varName);
+  //TO_BIGEND_INT  ( label8_record.varNum  );
+  TO_BIGEND_SHORT( label8_record.namLen  );
+  TO_BIGEND_SHORT( label8_record.varNum  );
+  TO_BIGEND_SHORT( label8_record.labLen   );
+  
+  
+ 
+  
+  //printf("Size of int: %zu bytes\n", sizeof(label8_record));
+  //printf("Size of int: %zu bytes\n", (unsigned long)*totLen);
+  /* copy filled struct to return area */
+  memcpy( raw_buffer, &label8_record,(unsigned long) *totLen );
+  
+  /* Set size for return */
+  raw_buffer_used =(unsigned long) *totLen;
+  
+  return;
+}
+
+
+void fill_label8_header(char **nvar)
+{
+  struct LABEL8_HEADER lbl8_header;
+  
+  blankCopy( lbl8_header.l1, 48,
+             "HEADER RECORD*******LABELV8 HEADER RECORD!!!!!!!");
+  blankCopy( lbl8_header.nvar, 15, nvar[0]);
+  blankFill( lbl8_header.l3, 17);
+  
+  
+  /* copy filled struct to return area */
+  memcpy( raw_buffer, &lbl8_header, sizeof(lbl8_header) );
+  
+  /* Set size for return */
+  raw_buffer_used = 80;
+  
   return;
 }
 
