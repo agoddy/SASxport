@@ -20,7 +20,8 @@ xport.namestr <- function(
                           iName="",
                           iLength=0,
                           iDigits=0,
-                          lVarName  #The long Variable Name
+                          lVarName,  #The long Variable Name
+                          lablen
                           )
 {
   if(is.factor(var))
@@ -71,6 +72,8 @@ xport.namestr <- function(
      nifd   = as.integer(iDigits),             # INFORMAT NUMBER OF DECIMALS
 
      npos   = as.integer(varPos),              # POSITION OF VALUE IN OBSERVATION
+     
+     nlablen = as.integer(lablen),
      
      PACKAGE="SASxport"
      )
